@@ -61,8 +61,22 @@
             padding-bottom: 25px;
     }
 
-    TH {border-width: 1px; font-size: 20px; padding: 3px; border-style: solid; border-color: gray;background-color: black; }
-    TD {border-width: 1px; font-size: 18px;padding: 3px; border-style: solid; border-color: gray;}
+    TH {
+        border-width: 1px; 
+        font-size: 20px; 
+        padding: 3px; 
+        border-style: solid; 
+        border-color: gray;
+        background-color: black; 
+    }
+    
+    TD {
+        border-width: 1px; 
+        font-size: 18px;
+        padding: 3px; 
+        border-style: solid; 
+        border-color: gray;
+    }
 
 </style>
 "@
@@ -70,7 +84,7 @@
 $outPath = <OutputFilepath>
 
 $driveArray = @()
-$drives = Get-PSDrive | Select Name, Root, Used, Free
+$drives = Get-PSDrive | Select-Object Name, Root, Used, Free
 foreach ($d in $drives){
     
     $driveObj = New-Object PSobject
@@ -104,7 +118,7 @@ foreach ($d in $drives){
 }
 
 $driveInfo = $driveArray | ConvertTo-Html -Fragment 
-$services = gsv | Select Name, Status | ConvertTo-Html -Fragment
+$services = Get-Service | Select-Object Name, Status | ConvertTo-Html -Fragment
 
 $body = "<h2>PS Drives</h2><br><br>$driveInfo<br><br><h2>Services Status</h2><br><br>$services<br><br>"
 ConvertTo-Html -PreContent $css -Title 'System Report' -Head '<h1>Drives Service Report Test</h1>' -Body $body | Out-File $outPath
