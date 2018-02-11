@@ -1,4 +1,5 @@
-﻿$CSS = @"
+﻿# CSS: Edit as needed. This controls what the report and elements in the report are displayed.
+$CSS = @"
 <style>
 
     body {
@@ -81,8 +82,10 @@
 </style>
 "@
 
+# Fill in path for HTML report
 $outPath = <OutputFilepath>
 
+# Sample Data for sample report output------------------------------------------------------------------------------------------------
 $driveArray = @()
 $drives = Get-PSDrive | Select-Object Name, Root, Used, Free
 foreach ($d in $drives){
@@ -117,10 +120,15 @@ foreach ($d in $drives){
 
 }
 
+# End Sample Data Region--------------------------------------------------------------------------------------------------------------
+
+# Save different Tables as 'Fragments' and include fragments in $body variable.
 $driveInfo = $driveArray | ConvertTo-Html -Fragment 
 $services = Get-Service | Select-Object Name, Status | ConvertTo-Html -Fragment
 
 $body = "<h2>PS Drives</h2><br><br>$driveInfo<br><br><h2>Services Status</h2><br><br>$services<br><br>"
+
+#Edit -Head <h1> to include desired Report Title. Can also save as variable for more elaborate header.
 ConvertTo-Html -PreContent $css -Title 'System Report' -Head '<h1>Drives Service Report Test</h1>' -Body $body | Out-File $outPath
 
 
