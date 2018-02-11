@@ -13,7 +13,7 @@ $CSS = @"
 
     h1 { 
             background-color: black;
-            align-items: center
+            align-items: center;
             justify-content: center;
             vertical-align: middle;
             border: 0px solid black;
@@ -29,7 +29,7 @@ $CSS = @"
     h2 { 
             margin: 0 auto;
             background-color: Black;
-            align-items: center
+            align-items: center;
             justify-content: center;
             vertical-align: middle;
             border: 3px solid black;
@@ -51,7 +51,7 @@ $CSS = @"
             border-collapse: collapse;
             background-color: black;
             background-color: black;
-            align-items: center
+            align-items: center;
             justify-content: center;
             vertical-align: middle;
             border: 0px solid black;
